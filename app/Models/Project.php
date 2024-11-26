@@ -10,7 +10,7 @@ class Project extends Model
         "id", "name", "description", "status", "start_date", "end_date",
     ];
 
-    public function projectToEmployeesRelationship () {
+    public function employees () {
         return $this->hasMany(Employee::class, "project_id");
     }
 }

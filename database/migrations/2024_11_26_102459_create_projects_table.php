@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string("name");
             $table->longText("description");
             $table->enum("status", ["ongoing", "completed", "cancelled"]);
-            $table->timestamp("start_date")->nullable();
-            $table->timestamp("end_date")->nullable();
+            $table->date("start_date")->nullable();
+            $table->date("end_date")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

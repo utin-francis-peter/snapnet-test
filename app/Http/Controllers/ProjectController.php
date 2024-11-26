@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -11,7 +12,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        return Project::all();
     }
 
     /**
@@ -19,7 +20,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $incomingFields = $request -> validate([
+           'name' => 'required|unique:projects',
+            'description' => 'nullable|string',
+            'status' => 'required|in:ongoing,completed,cancelled',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
+        ]);
+
+     return Project::create($incomingFields);
     }
 
     /**
@@ -27,7 +36,7 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Project::find($id);
     }
 
     /**
@@ -35,7 +44,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+    $project = Project::find($id);
+    $project->update($request -> all());
+    return $project;
     }
 
     /**
@@ -43,6 +55,7 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Project::destroy($id);
     }
+
 }

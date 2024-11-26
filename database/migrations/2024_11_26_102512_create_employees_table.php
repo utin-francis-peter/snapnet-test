@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("project_id")->contrained();
+            $table->foreignId("project_id")->contrained()->onDelete("cascade");
             $table->string("name");
             $table->string("email")->unique();
             $table->string("position");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
