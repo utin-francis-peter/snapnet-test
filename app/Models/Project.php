@@ -8,4 +8,7 @@ class Project extends Model
 {
     //
 
+    public function projectToEmployeesRelationship () {
+        return $this->hasMany(Employee::class, "project_id");
+    }
 }
