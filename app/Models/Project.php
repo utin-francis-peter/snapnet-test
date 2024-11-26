@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    //
+    protected $fillable = [
+        "id", "name", "description", "status", "start_date", "end_date",
+    ];
 
     public function projectToEmployeesRelationship () {
         return $this->hasMany(Employee::class, "project_id");
